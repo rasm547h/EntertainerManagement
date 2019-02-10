@@ -77,4 +77,10 @@
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="InsertIntoEntertainmentGroupMember.sql" />
+    <None Include="InsertIntoEntertainerGroup.sql" />
+    <None Include="InsertIntoStyle.sql" />
+    <None Include="InsertIntoeGroupMember.sql" />
+  </ItemGroup>
 </Project>
