@@ -58,4 +58,23 @@
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="EntertainerGroup.sql" />
+    <Build Include="EntertainerMember.sql" />
+    <Build Include="eGroupMember.sql" />
+    <Build Include="Agent.sql" />
+    <Build Include="Agency.sql" />
+    <Build Include="AgencyOffice.sql" />
+    <Build Include="Address.sql" />
+    <Build Include="AgentContactInformation.sql" />
+    <Build Include="OfficeContactInformation.sql" />
+    <Build Include="AgentEntertainerContract.sql" />
+    <Build Include="Style.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="EntertainerManagement.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+  </ItemGroup>
 </Project>
