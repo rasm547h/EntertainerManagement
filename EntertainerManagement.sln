@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43C490C6-BFF0-4621-81DE-321368E58F63}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Desktop\Dummy_Agency.sql = ..\..\..\Desktop\Dummy_Agency.sql
+		..\..\..\Desktop\Dummy_AgentContactInformation.sql = ..\..\..\Desktop\Dummy_AgentContactInformation.sql
+		..\..\..\Desktop\Dummy_Agents.sql = ..\..\..\Desktop\Dummy_Agents.sql
 		..\..\..\Desktop\Dummy_OfficeInformation.sql = ..\..\..\Desktop\Dummy_OfficeInformation.sql
 	EndProjectSection
 EndProject
