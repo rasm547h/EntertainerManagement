@@ -1,0 +1,42 @@
+﻿@model EntertainerManagementSite.Models.AgencyOffice
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AgencyOffice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Address_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Address_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agency.Agency_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agency.Agency_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficeContactInformation.ContactInfo_phoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficeContactInformation.ContactInfo_phoneNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FK_addressID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

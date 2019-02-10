@@ -134,6 +134,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AgenciesController.cs" />
+    <Compile Include="Controllers\AgencyOfficesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -241,6 +243,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Agencies\Create.cshtml" />
+    <Content Include="Views\Agencies\Delete.cshtml" />
+    <Content Include="Views\Agencies\Details.cshtml" />
+    <Content Include="Views\Agencies\Edit.cshtml" />
+    <Content Include="Views\Agencies\Index.cshtml" />
+    <Content Include="Views\AgencyOffices\Create.cshtml" />
+    <Content Include="Views\AgencyOffices\Delete.cshtml" />
+    <Content Include="Views\AgencyOffices\Details.cshtml" />
+    <Content Include="Views\AgencyOffices\Edit.cshtml" />
+    <Content Include="Views\AgencyOffices\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
