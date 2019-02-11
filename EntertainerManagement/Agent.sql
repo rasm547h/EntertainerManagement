@@ -12,10 +12,10 @@
 	ALTER TABLE dbo.Agent ADD
 	
     CONSTRAINT [FK_AgencyOffice] FOREIGN KEY (FK_agencyOfficeID)
-		REFERENCES AgencyOffice (FK_addressID) ON DELETE NO ACTION
-		 GO
+	REFERENCES AgencyOffice (FK_addressID) ON DELETE NO ACTION
+    GO
 
-		ALTER TABLE dbo.Agent ADD
+	ALTER TABLE dbo.Agent ADD
 	CONSTRAINT [PK_Agent] PRIMARY KEY (Agent_ID)
 	GO
 
@@ -29,5 +29,5 @@
 
 	ALTER TABLE dbo.Agent ADD
 	CONSTRAINT [Agent_lName] CHECK(LEN([Agent_lName]) > 0)
-GO
+    GO
 
