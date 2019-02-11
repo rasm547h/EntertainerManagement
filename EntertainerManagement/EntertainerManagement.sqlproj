@@ -70,6 +70,7 @@
     <Build Include="OfficeContactInformation.sql" />
     <Build Include="AgentEntertainerContract.sql" />
     <Build Include="Style.sql" />
+    <Build Include="AgentEntertainerGroups.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
