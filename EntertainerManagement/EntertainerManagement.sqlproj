@@ -72,9 +72,6 @@
     <Build Include="Style.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="EntertainerManagement.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
