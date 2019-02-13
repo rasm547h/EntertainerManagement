@@ -72,6 +72,7 @@
     <Build Include="Style.sql" />
     <Build Include="AgentEntertainerGroups.sql" />
     <Build Include="agentEntertainer.sql" />
+    <Build Include="GetAgentWithEntertainersByName.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
