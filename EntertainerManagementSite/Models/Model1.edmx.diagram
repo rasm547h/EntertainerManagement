@@ -25,6 +25,8 @@
         <AssociationConnector Association="EntertainerManagementModel.eGroup_FK_agentID" ManuallyRouted="false" />
         <AssociationConnector Association="EntertainerManagementModel.FK_style" ManuallyRouted="false" />
         <AssociationConnector Association="EntertainerManagementModel.eGroupMember" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.agentEntertainer" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.AgentEntertainerGroup" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

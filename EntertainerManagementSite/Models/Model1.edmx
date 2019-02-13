@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EntertainerManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EntertainerManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -115,6 +115,43 @@ warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not h
           </Key>
           <Property Name="Style_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Style_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EntertainerManagement.dbo.agentEntertainer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="agentEntertainer">
+          <Key>
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_fName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent_lName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Entertainer_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EntertainerManagement.dbo.AgentEntertainerGroups' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AgentEntertainerGroups">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Contract_ID" />
+            <PropertyRef Name="Contract_agentFee" />
+            <PropertyRef Name="Contract_date" />
+            <PropertyRef Name="Contract_expDate" />
+            <PropertyRef Name="EntertainerGroup_ID" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Agent_fName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent_lName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contract_ID" Type="int" Nullable="false" />
+          <Property Name="Contract_agentFee" Type="decimal" Precision="2" Scale="2" Nullable="false" />
+          <Property Name="Contract_detail" Type="text" />
+          <Property Name="Contract_date" Type="date" Nullable="false" />
+          <Property Name="Contract_expDate" Type="date" Nullable="false" />
+          <Property Name="EntertainerGroup_ID" Type="int" Nullable="false" />
+          <Property Name="Entertainer_name" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="eGroup_FK_agentID">
           <End Role="AgentEntertainerContract" Type="Self.AgentEntertainerContract" Multiplicity="0..1" />
@@ -242,6 +279,9 @@ warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAgentWithEntertainersByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fullNameParam" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="EntertainerManagementModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
@@ -259,6 +299,27 @@ warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not h
     [eGroupMember].[FK_eGroupID] AS [FK_eGroupID], 
     [eGroupMember].[FK_eMemberID] AS [FK_eMemberID]
     FROM [dbo].[eGroupMember] AS [eGroupMember]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="agentEntertainer" EntityType="Self.agentEntertainer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [agentEntertainer].[Agent_fName] AS [Agent_fName], 
+    [agentEntertainer].[Agent_lName] AS [Agent_lName], 
+    [agentEntertainer].[Entertainer_name] AS [Entertainer_name]
+    FROM [dbo].[agentEntertainer] AS [agentEntertainer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AgentEntertainerGroups" EntityType="Self.AgentEntertainerGroups" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AgentEntertainerGroups].[Agent_ID] AS [Agent_ID], 
+    [AgentEntertainerGroups].[Agent_fName] AS [Agent_fName], 
+    [AgentEntertainerGroups].[Agent_lName] AS [Agent_lName], 
+    [AgentEntertainerGroups].[Contract_ID] AS [Contract_ID], 
+    [AgentEntertainerGroups].[Contract_agentFee] AS [Contract_agentFee], 
+    [AgentEntertainerGroups].[Contract_detail] AS [Contract_detail], 
+    [AgentEntertainerGroups].[Contract_date] AS [Contract_date], 
+    [AgentEntertainerGroups].[Contract_expDate] AS [Contract_expDate], 
+    [AgentEntertainerGroups].[EntertainerGroup_ID] AS [EntertainerGroup_ID], 
+    [AgentEntertainerGroups].[Entertainer_name] AS [Entertainer_name]
+    FROM [dbo].[AgentEntertainerGroups] AS [AgentEntertainerGroups]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="eGroup_FK_agentID" Association="Self.eGroup_FK_agentID">
             <End Role="AgentEntertainerContract" EntitySet="AgentEntertainerContract" />
@@ -301,8 +362,7 @@ warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not h
             <End Role="EntertainerGroup" EntitySet="EntertainerGroup" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EntertainerManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -579,7 +639,50 @@ warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not h
             <End Role="EntertainerGroup" EntitySet="EntertainerGroups" />
             <End Role="EntertainerMember" EntitySet="EntertainerMembers" />
           </AssociationSet>
+          <EntitySet Name="agentEntertainers" EntityType="EntertainerManagementModel.agentEntertainer" />
+          <EntitySet Name="AgentEntertainerGroups" EntityType="EntertainerManagementModel.AgentEntertainerGroup" />
+          <FunctionImport Name="GetAgentWithEntertainersByName" ReturnType="Collection(EntertainerManagementModel.GetAgentWithEntertainersByName_Result)">
+            <Parameter Name="fullNameParam" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="agentEntertainer">
+          <Key>
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_fName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_lName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Entertainer_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AgentEntertainerGroup">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Contract_ID" />
+            <PropertyRef Name="Contract_agentFee" />
+            <PropertyRef Name="Contract_date" />
+            <PropertyRef Name="Contract_expDate" />
+            <PropertyRef Name="EntertainerGroup_ID" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Agent_fName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_lName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contract_ID" Type="Int32" Nullable="false" />
+          <Property Name="Contract_agentFee" Type="Decimal" Nullable="false" Precision="2" Scale="2" />
+          <Property Name="Contract_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contract_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Contract_expDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EntertainerGroup_ID" Type="Int32" Nullable="false" />
+          <Property Name="Entertainer_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GetAgentWithEntertainersByName_Result">
+          <Property Type="String" Name="Agent_fName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Agent_lName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Entertainer_name" Nullable="false" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,6 +809,40 @@ warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not h
               <ScalarProperty Name="eMember_ID" ColumnName="FK_eMemberID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="agentEntertainers">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.agentEntertainer">
+              <MappingFragment StoreEntitySet="agentEntertainer">
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentEntertainerGroups">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.AgentEntertainerGroup">
+              <MappingFragment StoreEntitySet="AgentEntertainerGroups">
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+                <ScalarProperty Name="EntertainerGroup_ID" ColumnName="EntertainerGroup_ID" />
+                <ScalarProperty Name="Contract_expDate" ColumnName="Contract_expDate" />
+                <ScalarProperty Name="Contract_date" ColumnName="Contract_date" />
+                <ScalarProperty Name="Contract_detail" ColumnName="Contract_detail" />
+                <ScalarProperty Name="Contract_agentFee" ColumnName="Contract_agentFee" />
+                <ScalarProperty Name="Contract_ID" ColumnName="Contract_ID" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentWithEntertainersByName" FunctionName="EntertainerManagementModel.Store.GetAgentWithEntertainersByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EntertainerManagementModel.GetAgentWithEntertainersByName_Result">
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
