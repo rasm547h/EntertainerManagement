@@ -1,0 +1,36 @@
+﻿@model EntertainerManagementSite.Models.GetAgentWithEntertainersByName_Result
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Agent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent_fName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent_fName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent_lName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent_lName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Entertainer_name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Entertainer_name)
+        </dd>
+
+    </dl>
+</div>

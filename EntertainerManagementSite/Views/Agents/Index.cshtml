@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EntertainerManagementSite.Models.Agent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Agent_fName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agent_lName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agent_salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agent_hiringDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AgencyOffice.FK_addressID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AgentContactInformation.ContactInfo_phoneNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agent_fName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agent_lName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agent_salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agent_hiringDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgencyOffice.FK_addressID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgentContactInformation.ContactInfo_phoneNo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Agent_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Agent_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Agent_ID })
+        </td>
+    </tr>
+}
+
+</table>
