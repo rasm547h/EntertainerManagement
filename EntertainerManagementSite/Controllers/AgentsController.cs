@@ -35,7 +35,6 @@ namespace EntertainerManagementSite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
-            //var vm = new AgentWithEntertainerViewModel() { firstName = agentWithEntertainers.}
             return View(agentWithEntertainers);
         }
 

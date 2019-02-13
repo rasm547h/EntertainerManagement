@@ -165,7 +165,6 @@
     <Compile Include="Models\AgentEntertainerGroup.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AgentWithEntertainerViewModel.cs" />
     <Compile Include="Models\C__RefactorLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
