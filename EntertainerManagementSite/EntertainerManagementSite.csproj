@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AgenciesController.cs" />
     <Compile Include="Controllers\AgencyOfficesController.cs" />
+    <Compile Include="Controllers\agentEntertainersController.cs" />
     <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +269,11 @@
     <Content Include="Views\Agents\Details.cshtml" />
     <Content Include="Views\Agents\Edit.cshtml" />
     <Content Include="Views\Agents\Index.cshtml" />
+    <Content Include="Views\agentEntertainers\Create.cshtml" />
+    <Content Include="Views\agentEntertainers\Delete.cshtml" />
+    <Content Include="Views\agentEntertainers\Details.cshtml" />
+    <Content Include="Views\agentEntertainers\Edit.cshtml" />
+    <Content Include="Views\agentEntertainers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
