@@ -83,5 +83,6 @@
     <None Include="InsertIntoEntertainerGroup.sql" />
     <None Include="InsertIntoStyle.sql" />
     <None Include="InsertIntoeGroupMember.sql" />
+    <None Include="Test.sql" />
   </ItemGroup>
 </Project>
