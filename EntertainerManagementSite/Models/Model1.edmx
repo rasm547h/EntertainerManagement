@@ -1,0 +1,869 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EntertainerManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Address_ID" />
+          </Key>
+          <Property Name="Address_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address_address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address_addressBuilding" Type="varchar" MaxLength="2" />
+          <Property Name="Address_addressNo" Type="smallint" Nullable="false" />
+          <Property Name="Address_addressNoRange" Type="tinyint" />
+          <Property Name="Address_city" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Address_zipcode" Type="varchar" MaxLength="20" />
+          <Property Name="Address_country" Type="varchar" MaxLength="55" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="Agency_ID" />
+          </Key>
+          <Property Name="Agency_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Agency_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgencyOffice">
+          <Key>
+            <PropertyRef Name="FK_addressID" />
+          </Key>
+          <Property Name="FK_agencyID" Type="int" Nullable="false" />
+          <Property Name="FK_addressID" Type="int" Nullable="false" />
+          <Property Name="FK_ContactInfoID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+          </Key>
+          <Property Name="Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Agent_fName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent_lName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent_salary" Type="money" Nullable="false" />
+          <Property Name="Agent_hiringDate" Type="date" Nullable="false" />
+          <Property Name="FK_agencyOfficeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgentContactInformation">
+          <Key>
+            <PropertyRef Name="FK_AgentID" />
+          </Key>
+          <Property Name="FK_AgentID" Type="int" Nullable="false" />
+          <Property Name="ContactInfo_phoneNo" Type="varchar" MaxLength="15" />
+          <Property Name="ContactInfo_phoneNoExt" Type="varchar" MaxLength="11" />
+          <Property Name="ContactInfo_email" Type="varchar" MaxLength="254" />
+          <Property Name="ContactInfo_type" Type="nvarchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgentEntertainerContract">
+          <Key>
+            <PropertyRef Name="Contract_ID" />
+          </Key>
+          <Property Name="Contract_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_agentID" Type="int" Nullable="false" />
+          <Property Name="Contract_agentFee" Type="decimal" Precision="2" Scale="2" Nullable="false" />
+          <Property Name="Contract_detail" Type="text" />
+          <Property Name="Contract_date" Type="date" Nullable="false" />
+          <Property Name="Contract_expDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EntertainerManagement.dbo.eGroupMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="eGroupMember">
+          <Key>
+            <PropertyRef Name="FK_eGroupID" />
+            <PropertyRef Name="FK_eMemberID" />
+          </Key>
+          <Property Name="FK_eGroupID" Type="int" Nullable="false" />
+          <Property Name="FK_eMemberID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntertainerGroup">
+          <Key>
+            <PropertyRef Name="EntertainerGroup_ID" />
+          </Key>
+          <Property Name="EntertainerGroup_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Entertainer_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FK_contractID" Type="int" />
+          <Property Name="FK_styleID" Type="int" />
+          <Property Name="EntertainmentGroup_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntertainerMember">
+          <Key>
+            <PropertyRef Name="eMember_ID" />
+          </Key>
+          <Property Name="eMember_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="lName" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfficeContactInformation">
+          <Key>
+            <PropertyRef Name="ContactInfo_ID" />
+          </Key>
+          <Property Name="ContactInfo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactInfo_phoneNo" Type="varchar" MaxLength="15" />
+          <Property Name="ContactInfo_phoneNoExt" Type="varchar" MaxLength="11" />
+          <Property Name="ContactInfo_email" Type="varchar" MaxLength="254" />
+          <Property Name="ContactInfo_type" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Style">
+          <Key>
+            <PropertyRef Name="Style_ID" />
+          </Key>
+          <Property Name="Style_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Style_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EntertainerManagement.dbo.agentEntertainer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="agentEntertainer">
+          <Key>
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_fName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent_lName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Entertainer_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EntertainerManagement.dbo.AgentEntertainerGroups' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AgentEntertainerGroups">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Contract_ID" />
+            <PropertyRef Name="Contract_agentFee" />
+            <PropertyRef Name="Contract_date" />
+            <PropertyRef Name="Contract_expDate" />
+            <PropertyRef Name="EntertainerGroup_ID" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Agent_fName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent_lName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contract_ID" Type="int" Nullable="false" />
+          <Property Name="Contract_agentFee" Type="decimal" Precision="2" Scale="2" Nullable="false" />
+          <Property Name="Contract_detail" Type="text" />
+          <Property Name="Contract_date" Type="date" Nullable="false" />
+          <Property Name="Contract_expDate" Type="date" Nullable="false" />
+          <Property Name="EntertainerGroup_ID" Type="int" Nullable="false" />
+          <Property Name="Entertainer_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="eGroup_FK_agentID">
+          <End Role="AgentEntertainerContract" Type="Self.AgentEntertainerContract" Multiplicity="0..1" />
+          <End Role="EntertainerGroup" Type="Self.EntertainerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentEntertainerContract">
+              <PropertyRef Name="Contract_ID" />
+            </Principal>
+            <Dependent Role="EntertainerGroup">
+              <PropertyRef Name="FK_contractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_addressID">
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Address_ID" />
+            </Principal>
+            <Dependent Role="AgencyOffice">
+              <PropertyRef Name="FK_addressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agencyID">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="Agency_ID" />
+            </Principal>
+            <Dependent Role="AgencyOffice">
+              <PropertyRef Name="FK_agencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgencyOffice">
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgencyOffice">
+              <PropertyRef Name="FK_addressID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="FK_agencyOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AgentEntertainerContract" Type="Self.AgentEntertainerContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="AgentEntertainerContract">
+              <PropertyRef Name="FK_agentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentID">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AgentContactInformation" Type="Self.AgentContactInformation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="AgentContactInformation">
+              <PropertyRef Name="FK_AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactInfoID">
+          <End Role="OfficeContactInformation" Type="Self.OfficeContactInformation" Multiplicity="1" />
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeContactInformation">
+              <PropertyRef Name="ContactInfo_ID" />
+            </Principal>
+            <Dependent Role="AgencyOffice">
+              <PropertyRef Name="FK_ContactInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_eGroupID">
+          <End Role="EntertainerGroup" Type="Self.EntertainerGroup" Multiplicity="1" />
+          <End Role="eGroupMember" Type="Self.eGroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntertainerGroup">
+              <PropertyRef Name="EntertainerGroup_ID" />
+            </Principal>
+            <Dependent Role="eGroupMember">
+              <PropertyRef Name="FK_eGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_eMemberID">
+          <End Role="EntertainerMember" Type="Self.EntertainerMember" Multiplicity="1" />
+          <End Role="eGroupMember" Type="Self.eGroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntertainerMember">
+              <PropertyRef Name="eMember_ID" />
+            </Principal>
+            <Dependent Role="eGroupMember">
+              <PropertyRef Name="FK_eMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_style">
+          <End Role="Style" Type="Self.Style" Multiplicity="0..1" />
+          <End Role="EntertainerGroup" Type="Self.EntertainerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Style_ID" />
+            </Principal>
+            <Dependent Role="EntertainerGroup">
+              <PropertyRef Name="FK_styleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAgentWithEntertainersByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fullNameParam" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="EntertainerManagementModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Agency" EntityType="Self.Agency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgencyOffice" EntityType="Self.AgencyOffice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentContactInformation" EntityType="Self.AgentContactInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentEntertainerContract" EntityType="Self.AgentEntertainerContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntertainerGroup" EntityType="Self.EntertainerGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntertainerMember" EntityType="Self.EntertainerMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficeContactInformation" EntityType="Self.OfficeContactInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Style" EntityType="Self.Style" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="eGroupMember" EntityType="Self.eGroupMember" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [eGroupMember].[FK_eGroupID] AS [FK_eGroupID], 
+    [eGroupMember].[FK_eMemberID] AS [FK_eMemberID]
+    FROM [dbo].[eGroupMember] AS [eGroupMember]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="agentEntertainer" EntityType="Self.agentEntertainer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [agentEntertainer].[Agent_fName] AS [Agent_fName], 
+    [agentEntertainer].[Agent_lName] AS [Agent_lName], 
+    [agentEntertainer].[Entertainer_name] AS [Entertainer_name]
+    FROM [dbo].[agentEntertainer] AS [agentEntertainer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AgentEntertainerGroups" EntityType="Self.AgentEntertainerGroups" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AgentEntertainerGroups].[Agent_ID] AS [Agent_ID], 
+    [AgentEntertainerGroups].[Agent_fName] AS [Agent_fName], 
+    [AgentEntertainerGroups].[Agent_lName] AS [Agent_lName], 
+    [AgentEntertainerGroups].[Contract_ID] AS [Contract_ID], 
+    [AgentEntertainerGroups].[Contract_agentFee] AS [Contract_agentFee], 
+    [AgentEntertainerGroups].[Contract_detail] AS [Contract_detail], 
+    [AgentEntertainerGroups].[Contract_date] AS [Contract_date], 
+    [AgentEntertainerGroups].[Contract_expDate] AS [Contract_expDate], 
+    [AgentEntertainerGroups].[EntertainerGroup_ID] AS [EntertainerGroup_ID], 
+    [AgentEntertainerGroups].[Entertainer_name] AS [Entertainer_name]
+    FROM [dbo].[AgentEntertainerGroups] AS [AgentEntertainerGroups]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="eGroup_FK_agentID" Association="Self.eGroup_FK_agentID">
+            <End Role="AgentEntertainerContract" EntitySet="AgentEntertainerContract" />
+            <End Role="EntertainerGroup" EntitySet="EntertainerGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_addressID" Association="Self.FK_addressID">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="AgencyOffice" EntitySet="AgencyOffice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agencyID" Association="Self.FK_agencyID">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="AgencyOffice" EntitySet="AgencyOffice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgencyOffice" Association="Self.FK_AgencyOffice">
+            <End Role="AgencyOffice" EntitySet="AgencyOffice" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agent" Association="Self.FK_agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="AgentEntertainerContract" EntitySet="AgentEntertainerContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentID" Association="Self.FK_AgentID">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="AgentContactInformation" EntitySet="AgentContactInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactInfoID" Association="Self.FK_ContactInfoID">
+            <End Role="OfficeContactInformation" EntitySet="OfficeContactInformation" />
+            <End Role="AgencyOffice" EntitySet="AgencyOffice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_eGroupID" Association="Self.FK_eGroupID">
+            <End Role="EntertainerGroup" EntitySet="EntertainerGroup" />
+            <End Role="eGroupMember" EntitySet="eGroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_eMemberID" Association="Self.FK_eMemberID">
+            <End Role="EntertainerMember" EntitySet="EntertainerMember" />
+            <End Role="eGroupMember" EntitySet="eGroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_style" Association="Self.FK_style">
+            <End Role="Style" EntitySet="Style" />
+            <End Role="EntertainerGroup" EntitySet="EntertainerGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EntertainerManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Address_ID" />
+          </Key>
+          <Property Name="Address_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address_address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_addressBuilding" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Address_addressNo" Type="Int16" Nullable="false" />
+          <Property Name="Address_addressNoRange" Type="Byte" />
+          <Property Name="Address_city" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_zipcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address_country" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AgencyOffice" Relationship="Self.FK_addressID" FromRole="Address" ToRole="AgencyOffice" />
+        </EntityType>
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="Agency_ID" />
+          </Key>
+          <Property Name="Agency_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Agency_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AgencyOffices" Relationship="Self.FK_agencyID" FromRole="Agency" ToRole="AgencyOffice" />
+        </EntityType>
+        <EntityType Name="AgencyOffice">
+          <Key>
+            <PropertyRef Name="FK_addressID" />
+          </Key>
+          <Property Name="FK_agencyID" Type="Int32" Nullable="false" />
+          <Property Name="FK_addressID" Type="Int32" Nullable="false" />
+          <Property Name="FK_ContactInfoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_addressID" FromRole="AgencyOffice" ToRole="Address" />
+          <NavigationProperty Name="Agency" Relationship="Self.FK_agencyID" FromRole="AgencyOffice" ToRole="Agency" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_AgencyOffice" FromRole="AgencyOffice" ToRole="Agent" />
+          <NavigationProperty Name="OfficeContactInformation" Relationship="Self.FK_ContactInfoID" FromRole="AgencyOffice" ToRole="OfficeContactInformation" />
+        </EntityType>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+          </Key>
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Agent_fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Agent_lName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Agent_salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Agent_hiringDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FK_agencyOfficeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AgencyOffice" Relationship="Self.FK_AgencyOffice" FromRole="Agent" ToRole="AgencyOffice" />
+          <NavigationProperty Name="AgentEntertainerContracts" Relationship="Self.FK_agent" FromRole="Agent" ToRole="AgentEntertainerContract" />
+          <NavigationProperty Name="AgentContactInformation" Relationship="Self.FK_AgentID" FromRole="Agent" ToRole="AgentContactInformation" />
+        </EntityType>
+        <EntityType Name="AgentContactInformation">
+          <Key>
+            <PropertyRef Name="FK_AgentID" />
+          </Key>
+          <Property Name="FK_AgentID" Type="Int32" Nullable="false" />
+          <Property Name="ContactInfo_phoneNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactInfo_phoneNoExt" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="ContactInfo_email" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="ContactInfo_type" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_AgentID" FromRole="AgentContactInformation" ToRole="Agent" />
+        </EntityType>
+        <EntityType Name="AgentEntertainerContract">
+          <Key>
+            <PropertyRef Name="Contract_ID" />
+          </Key>
+          <Property Name="Contract_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_agentID" Type="Int32" Nullable="false" />
+          <Property Name="Contract_agentFee" Type="Decimal" Precision="2" Scale="2" Nullable="false" />
+          <Property Name="Contract_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contract_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Contract_expDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_agent" FromRole="AgentEntertainerContract" ToRole="Agent" />
+          <NavigationProperty Name="EntertainerGroups" Relationship="Self.eGroup_FK_agentID" FromRole="AgentEntertainerContract" ToRole="EntertainerGroup" />
+        </EntityType>
+        <EntityType Name="EntertainerGroup">
+          <Key>
+            <PropertyRef Name="EntertainerGroup_ID" />
+          </Key>
+          <Property Name="EntertainerGroup_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Entertainer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FK_contractID" Type="Int32" />
+          <Property Name="FK_styleID" Type="Int32" />
+          <Property Name="EntertainmentGroup_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgentEntertainerContract" Relationship="Self.eGroup_FK_agentID" FromRole="EntertainerGroup" ToRole="AgentEntertainerContract" />
+          <NavigationProperty Name="Style" Relationship="Self.FK_style" FromRole="EntertainerGroup" ToRole="Style" />
+          <NavigationProperty Name="EntertainerMembers" Relationship="Self.eGroupMember" FromRole="EntertainerGroup" ToRole="EntertainerMember" />
+        </EntityType>
+        <EntityType Name="EntertainerMember">
+          <Key>
+            <PropertyRef Name="eMember_ID" />
+          </Key>
+          <Property Name="eMember_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EntertainerGroups" Relationship="Self.eGroupMember" FromRole="EntertainerMember" ToRole="EntertainerGroup" />
+        </EntityType>
+        <EntityType Name="OfficeContactInformation">
+          <Key>
+            <PropertyRef Name="ContactInfo_ID" />
+          </Key>
+          <Property Name="ContactInfo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactInfo_phoneNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactInfo_phoneNoExt" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="ContactInfo_email" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="ContactInfo_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AgencyOffices" Relationship="Self.FK_ContactInfoID" FromRole="OfficeContactInformation" ToRole="AgencyOffice" />
+        </EntityType>
+        <EntityType Name="Style">
+          <Key>
+            <PropertyRef Name="Style_ID" />
+          </Key>
+          <Property Name="Style_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Style_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EntertainerGroups" Relationship="Self.FK_style" FromRole="Style" ToRole="EntertainerGroup" />
+        </EntityType>
+        <Association Name="FK_addressID">
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Address_ID" />
+            </Principal>
+            <Dependent Role="AgencyOffice">
+              <PropertyRef Name="FK_addressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agencyID">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="Agency_ID" />
+            </Principal>
+            <Dependent Role="AgencyOffice">
+              <PropertyRef Name="FK_agencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgencyOffice">
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgencyOffice">
+              <PropertyRef Name="FK_addressID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="FK_agencyOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactInfoID">
+          <End Role="OfficeContactInformation" Type="Self.OfficeContactInformation" Multiplicity="1" />
+          <End Role="AgencyOffice" Type="Self.AgencyOffice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeContactInformation">
+              <PropertyRef Name="ContactInfo_ID" />
+            </Principal>
+            <Dependent Role="AgencyOffice">
+              <PropertyRef Name="FK_ContactInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AgentEntertainerContract" Type="Self.AgentEntertainerContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="AgentEntertainerContract">
+              <PropertyRef Name="FK_agentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentID">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AgentContactInformation" Type="Self.AgentContactInformation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="AgentContactInformation">
+              <PropertyRef Name="FK_AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="eGroup_FK_agentID">
+          <End Role="AgentEntertainerContract" Type="Self.AgentEntertainerContract" Multiplicity="0..1" />
+          <End Role="EntertainerGroup" Type="Self.EntertainerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentEntertainerContract">
+              <PropertyRef Name="Contract_ID" />
+            </Principal>
+            <Dependent Role="EntertainerGroup">
+              <PropertyRef Name="FK_contractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_style">
+          <End Role="Style" Type="Self.Style" Multiplicity="0..1" />
+          <End Role="EntertainerGroup" Type="Self.EntertainerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Style_ID" />
+            </Principal>
+            <Dependent Role="EntertainerGroup">
+              <PropertyRef Name="FK_styleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="eGroupMember">
+          <End Role="EntertainerGroup" Type="Self.EntertainerGroup" Multiplicity="*" />
+          <End Role="EntertainerMember" Type="Self.EntertainerMember" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EntertainerManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Agencies" EntityType="Self.Agency" />
+          <EntitySet Name="AgencyOffices" EntityType="Self.AgencyOffice" />
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="AgentContactInformations" EntityType="Self.AgentContactInformation" />
+          <EntitySet Name="AgentEntertainerContracts" EntityType="Self.AgentEntertainerContract" />
+          <EntitySet Name="EntertainerGroups" EntityType="Self.EntertainerGroup" />
+          <EntitySet Name="EntertainerMembers" EntityType="Self.EntertainerMember" />
+          <EntitySet Name="OfficeContactInformations" EntityType="Self.OfficeContactInformation" />
+          <EntitySet Name="Styles" EntityType="Self.Style" />
+          <AssociationSet Name="FK_addressID" Association="Self.FK_addressID">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="AgencyOffice" EntitySet="AgencyOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agencyID" Association="Self.FK_agencyID">
+            <End Role="Agency" EntitySet="Agencies" />
+            <End Role="AgencyOffice" EntitySet="AgencyOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgencyOffice" Association="Self.FK_AgencyOffice">
+            <End Role="AgencyOffice" EntitySet="AgencyOffices" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactInfoID" Association="Self.FK_ContactInfoID">
+            <End Role="OfficeContactInformation" EntitySet="OfficeContactInformations" />
+            <End Role="AgencyOffice" EntitySet="AgencyOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agent" Association="Self.FK_agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="AgentEntertainerContract" EntitySet="AgentEntertainerContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentID" Association="Self.FK_AgentID">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="AgentContactInformation" EntitySet="AgentContactInformations" />
+          </AssociationSet>
+          <AssociationSet Name="eGroup_FK_agentID" Association="Self.eGroup_FK_agentID">
+            <End Role="AgentEntertainerContract" EntitySet="AgentEntertainerContracts" />
+            <End Role="EntertainerGroup" EntitySet="EntertainerGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_style" Association="Self.FK_style">
+            <End Role="Style" EntitySet="Styles" />
+            <End Role="EntertainerGroup" EntitySet="EntertainerGroups" />
+          </AssociationSet>
+          <AssociationSet Name="eGroupMember" Association="Self.eGroupMember">
+            <End Role="EntertainerGroup" EntitySet="EntertainerGroups" />
+            <End Role="EntertainerMember" EntitySet="EntertainerMembers" />
+          </AssociationSet>
+          <EntitySet Name="agentEntertainers" EntityType="EntertainerManagementModel.agentEntertainer" />
+          <EntitySet Name="AgentEntertainerGroups" EntityType="EntertainerManagementModel.AgentEntertainerGroup" />
+          <FunctionImport Name="GetAgentWithEntertainersByName" ReturnType="Collection(EntertainerManagementModel.GetAgentWithEntertainersByName_Result)">
+            <Parameter Name="fullNameParam" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="agentEntertainer">
+          <Key>
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_fName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_lName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Entertainer_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AgentEntertainerGroup">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+            <PropertyRef Name="Agent_fName" />
+            <PropertyRef Name="Agent_lName" />
+            <PropertyRef Name="Contract_ID" />
+            <PropertyRef Name="Contract_agentFee" />
+            <PropertyRef Name="Contract_date" />
+            <PropertyRef Name="Contract_expDate" />
+            <PropertyRef Name="EntertainerGroup_ID" />
+            <PropertyRef Name="Entertainer_name" />
+          </Key>
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Agent_fName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_lName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contract_ID" Type="Int32" Nullable="false" />
+          <Property Name="Contract_agentFee" Type="Decimal" Nullable="false" Precision="2" Scale="2" />
+          <Property Name="Contract_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contract_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Contract_expDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EntertainerGroup_ID" Type="Int32" Nullable="false" />
+          <Property Name="Entertainer_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GetAgentWithEntertainersByName_Result">
+          <Property Type="String" Name="Agent_fName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Agent_lName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Entertainer_name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntertainerManagementModelStoreContainer" CdmEntityContainer="EntertainerManagementEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+                <ScalarProperty Name="Address_address" ColumnName="Address_address" />
+                <ScalarProperty Name="Address_addressBuilding" ColumnName="Address_addressBuilding" />
+                <ScalarProperty Name="Address_addressNo" ColumnName="Address_addressNo" />
+                <ScalarProperty Name="Address_addressNoRange" ColumnName="Address_addressNoRange" />
+                <ScalarProperty Name="Address_city" ColumnName="Address_city" />
+                <ScalarProperty Name="Address_zipcode" ColumnName="Address_zipcode" />
+                <ScalarProperty Name="Address_country" ColumnName="Address_country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agencies">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.Agency">
+              <MappingFragment StoreEntitySet="Agency">
+                <ScalarProperty Name="Agency_ID" ColumnName="Agency_ID" />
+                <ScalarProperty Name="Agency_name" ColumnName="Agency_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgencyOffices">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.AgencyOffice">
+              <MappingFragment StoreEntitySet="AgencyOffice">
+                <ScalarProperty Name="FK_agencyID" ColumnName="FK_agencyID" />
+                <ScalarProperty Name="FK_addressID" ColumnName="FK_addressID" />
+                <ScalarProperty Name="FK_ContactInfoID" ColumnName="FK_ContactInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Agent_salary" ColumnName="Agent_salary" />
+                <ScalarProperty Name="Agent_hiringDate" ColumnName="Agent_hiringDate" />
+                <ScalarProperty Name="FK_agencyOfficeID" ColumnName="FK_agencyOfficeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentContactInformations">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.AgentContactInformation">
+              <MappingFragment StoreEntitySet="AgentContactInformation">
+                <ScalarProperty Name="FK_AgentID" ColumnName="FK_AgentID" />
+                <ScalarProperty Name="ContactInfo_phoneNo" ColumnName="ContactInfo_phoneNo" />
+                <ScalarProperty Name="ContactInfo_phoneNoExt" ColumnName="ContactInfo_phoneNoExt" />
+                <ScalarProperty Name="ContactInfo_email" ColumnName="ContactInfo_email" />
+                <ScalarProperty Name="ContactInfo_type" ColumnName="ContactInfo_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentEntertainerContracts">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.AgentEntertainerContract">
+              <MappingFragment StoreEntitySet="AgentEntertainerContract">
+                <ScalarProperty Name="Contract_ID" ColumnName="Contract_ID" />
+                <ScalarProperty Name="FK_agentID" ColumnName="FK_agentID" />
+                <ScalarProperty Name="Contract_agentFee" ColumnName="Contract_agentFee" />
+                <ScalarProperty Name="Contract_detail" ColumnName="Contract_detail" />
+                <ScalarProperty Name="Contract_date" ColumnName="Contract_date" />
+                <ScalarProperty Name="Contract_expDate" ColumnName="Contract_expDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntertainerGroups">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.EntertainerGroup">
+              <MappingFragment StoreEntitySet="EntertainerGroup">
+                <ScalarProperty Name="EntertainerGroup_ID" ColumnName="EntertainerGroup_ID" />
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+                <ScalarProperty Name="FK_contractID" ColumnName="FK_contractID" />
+                <ScalarProperty Name="FK_styleID" ColumnName="FK_styleID" />
+                <ScalarProperty Name="EntertainmentGroup_active" ColumnName="EntertainmentGroup_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntertainerMembers">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.EntertainerMember">
+              <MappingFragment StoreEntitySet="EntertainerMember">
+                <ScalarProperty Name="eMember_ID" ColumnName="eMember_ID" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficeContactInformations">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.OfficeContactInformation">
+              <MappingFragment StoreEntitySet="OfficeContactInformation">
+                <ScalarProperty Name="ContactInfo_ID" ColumnName="ContactInfo_ID" />
+                <ScalarProperty Name="ContactInfo_phoneNo" ColumnName="ContactInfo_phoneNo" />
+                <ScalarProperty Name="ContactInfo_phoneNoExt" ColumnName="ContactInfo_phoneNoExt" />
+                <ScalarProperty Name="ContactInfo_email" ColumnName="ContactInfo_email" />
+                <ScalarProperty Name="ContactInfo_type" ColumnName="ContactInfo_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Styles">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.Style">
+              <MappingFragment StoreEntitySet="Style">
+                <ScalarProperty Name="Style_ID" ColumnName="Style_ID" />
+                <ScalarProperty Name="Style_name" ColumnName="Style_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="eGroupMember" TypeName="EntertainerManagementModel.eGroupMember" StoreEntitySet="eGroupMember">
+            <EndProperty Name="EntertainerGroup">
+              <ScalarProperty Name="EntertainerGroup_ID" ColumnName="FK_eGroupID" />
+            </EndProperty>
+            <EndProperty Name="EntertainerMember">
+              <ScalarProperty Name="eMember_ID" ColumnName="FK_eMemberID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="agentEntertainers">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.agentEntertainer">
+              <MappingFragment StoreEntitySet="agentEntertainer">
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentEntertainerGroups">
+            <EntityTypeMapping TypeName="EntertainerManagementModel.AgentEntertainerGroup">
+              <MappingFragment StoreEntitySet="AgentEntertainerGroups">
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+                <ScalarProperty Name="EntertainerGroup_ID" ColumnName="EntertainerGroup_ID" />
+                <ScalarProperty Name="Contract_expDate" ColumnName="Contract_expDate" />
+                <ScalarProperty Name="Contract_date" ColumnName="Contract_date" />
+                <ScalarProperty Name="Contract_detail" ColumnName="Contract_detail" />
+                <ScalarProperty Name="Contract_agentFee" ColumnName="Contract_agentFee" />
+                <ScalarProperty Name="Contract_ID" ColumnName="Contract_ID" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentWithEntertainersByName" FunctionName="EntertainerManagementModel.Store.GetAgentWithEntertainersByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EntertainerManagementModel.GetAgentWithEntertainersByName_Result">
+                <ScalarProperty Name="Agent_fName" ColumnName="Agent_fName" />
+                <ScalarProperty Name="Agent_lName" ColumnName="Agent_lName" />
+                <ScalarProperty Name="Entertainer_name" ColumnName="Entertainer_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

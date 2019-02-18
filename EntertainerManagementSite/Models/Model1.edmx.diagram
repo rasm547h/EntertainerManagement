@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a243340242394c04997bbdbcd46d40fa" Name="Diagram1">
+        <EntityTypeShape EntityType="EntertainerManagementModel.C__RefactorLog" Width="1.5" PointX="2.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.Address" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.Agency" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.AgencyOffice" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.Agent" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.AgentContactInformation" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.AgentEntertainerContract" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.EntertainerGroup" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.EntertainerMember" Width="1.5" PointX="12" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.OfficeContactInformation" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.Style" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_addressID" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_agencyID" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_AgencyOffice" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_ContactInfoID" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_agent" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_AgentID" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.eGroup_FK_agentID" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.FK_style" ManuallyRouted="false" />
+        <AssociationConnector Association="EntertainerManagementModel.eGroupMember" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.agentEntertainer" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EntertainerManagementModel.AgentEntertainerGroup" Width="1.5" PointX="10.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

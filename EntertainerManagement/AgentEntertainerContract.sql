@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [AgentEntertainerContract] (
     Contract_ID int identity not null primary key,
 	[FK_agentID] int  NOT NULL ,
-    [Contract_agentFee] decimal(2,2)  NOT NULL DEFAULT 10 ,
+    [Contract_agentFee] decimal(4,2)  NOT NULL DEFAULT 10 ,
     [Contract_detail] text  NULL ,
     [Contract_date] date  NOT NULL ,
     [Contract_expDate] date  NOT NULL)
