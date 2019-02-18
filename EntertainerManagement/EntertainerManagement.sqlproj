@@ -75,6 +75,10 @@
     <Build Include="GetAgentWithEntertainersByName.sql" />
     <Build Include="agentSalary.sql" />
     <Build Include="CreateBooking.sql" />
+    <Build Include="Booking.sql" />
+    <Build Include="Event.sql" />
+    <Build Include="Customers.sql" />
+    <Build Include="EventBookings.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
