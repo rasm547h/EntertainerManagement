@@ -1,6 +1,6 @@
 CREATE TABLE [dbo].[Customer]
 (
-	Customer_ID INT NOT NULL, 
+	Customer_ID INT IDENTITY NOT NULL, 
     Customer_fName NVARCHAR(50) NOT NULL, 
     Customer_lName NVARCHAR(50) NOT NULL,
 	Customer_Mobile INT NOT NULL,
